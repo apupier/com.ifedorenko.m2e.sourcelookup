@@ -32,7 +32,7 @@ public class SourceLookupActivator
 
     private BackgroundProcessingJob backgroundJob;
 
-    private JavaProjectSources javaProjectSources;
+    private JavaProjectSources javaProjectSources = null;
 
     public SourceLookupActivator()
     {
@@ -53,9 +53,10 @@ public class SourceLookupActivator
     {
         backgroundJob.cancel();
         backgroundJob = null;
-
-        javaProjectSources.close();
-        javaProjectSources = null;
+        if(javaProjectSources != null){
+            javaProjectSources.close();
+            javaProjectSources = null;
+        }
 
         plugin = null;
 
